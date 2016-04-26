@@ -1,0 +1,116 @@
+.container{
+    background-color:aqua;
+    background-size:contain;
+}
+
+.imgbackground {
+    margin: 0 auto;
+    height:33%;
+    width:100%;
+    background-image: url("imageback.png");
+    background-position: 50% 0px;
+    background-repeat: no-repeat;
+}
+
+.body{
+    margin: 0 auto;
+    width:75%;
+    height: auto;
+    margin-top: -70px;
+    opacity: 0.85;
+    background-color: lightblue;
+}
+
+.myImage{
+    background-image: url("myImage.png");
+    background-size: cover;
+    float:left;
+    height: 200px;
+    width: 200px;
+}
+
+.myInfo{
+    padding-top:10px;
+    padding-left:240px;
+}
+
+.myInfo a:link{
+    text-decoration: none;
+    color: blueviolet;
+}
+
+.position{
+    font-size: 24px;
+    color: blueviolet;
+}
+
+.job{
+    color: cadetblue;
+}
+
+.fix-distance{
+    clear: both;
+    margin-top: -16px;
+}
+
+.contact{
+  margin: 0 auto;
+  padding:10px;
+  float: left;
+  transition: all linear 1s;
+  background-color: lightgoldenrodyellow;
+  height: 50px;
+  width: 100%;
+}
+
+.contact-check{
+    padding: 30px;
+    background-color: lightblue;
+    width:90%;
+}
+
+.ng-hide {
+    background-color: lightsteelblue;
+    font-size: 0;
+    height:0px;
+    size:0px;
+}
+
+#myface a:link{
+    text-decoration: none;
+    color: blueviolet;
+    padding-left: 5px;
+}
+
+.background{
+    margin: 0 auto;
+    margin-top:10px; 
+    height: auto;
+    width: 75%;
+    background-color: lightblue;
+}
+
+.background h2{
+    padding: 5px;
+    font-size: 18px;
+    background-color:black;
+    color: white;
+    width:max-content;
+}
+
+#background-summary{
+    padding-top: 20px;
+    padding-left: 20px; 
+}
+
+#summary{
+    font-size: 20px;
+}
+
+#border{
+    margin: 0 auto;
+    color: aliceblue;
+    width: 75%;
+    border: 1px;
+    border-style: solid;
+}
