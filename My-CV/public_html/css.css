@@ -98,16 +98,16 @@
     width:max-content;
 }
 
-#background-summary{
+#background-mytitle{
     padding-top: 20px;
     padding-left: 20px; 
 }
 
-#background-summary a:link{
+#background-mytitle a:link{
     text-decoration: none;
 }
 
-#summary{
+#mytitle{
     color: cadetblue;
     font-size: 24px;
 }

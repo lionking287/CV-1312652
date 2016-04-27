@@ -38,14 +38,14 @@
             <div>
                 <h2>Background</h2>
             </div>
-            <div id="background-summary">
-                <ng-md-icon icon="description" style="fill:black" size="40"></ng-md-icon> <span id="summary">Summary</span>
+            <div id="background-mytitle">
+                <ng-md-icon icon="description" style="fill:black" size="40"></ng-md-icon> <span id="mytitle">Summary</span>
                 <p>{{summarycontent}}</p><br/>
                 <p id="border"></p><br/>
             </div>
             
-            <div id="background-summary">
-                <ng-md-icon icon="my_library_books" style="fill:black" size="40"></ng-md-icon> <span id="summary">Experience</span>
+            <div id="background-mytitle">
+                <ng-md-icon icon="my_library_books" style="fill:black" size="40"></ng-md-icon> <span id="mytitle">Experience</span>
                 <ul id="exp">
                     <li ng-repeat="x in myDataExp">
                         <h4>{{x.quest}}</b></h4>
@@ -56,8 +56,8 @@
                 <p id="border"></p><br/>
             </div>
             
-            <div id="background-summary">
-                <ng-md-icon icon="assignment" style="fill:black" size="40"></ng-md-icon> <span id="summary">Project</span>
+            <div id="background-mytitle">
+                <ng-md-icon icon="assignment" style="fill:black" size="40"></ng-md-icon> <span id="mytitle">Project</span>
                 <ul id="exp">
                     <li ng-repeat="x in myDataPro">
                         <h4><b>{{x.name}}</b></h4>
@@ -68,8 +68,8 @@
                 <p id="border"></p><br/>
             </div>
             
-            <div id="background-summary">
-                <ng-md-icon icon="description" style="fill:black" size="40"></ng-md-icon> <span id="summary">Skills</span>
+            <div id="background-mytitle">
+                <ng-md-icon icon="description" style="fill:black" size="40"></ng-md-icon> <span id="mytitle">Skills</span>
                 <div ng-repeat="x in myDataSkills">
                     <h5><li>{{x.name}}:</li> 
                         <ng-md-icon icon="star" style="fill:#d2be0e" size="20"></ng-md-icon>
@@ -82,8 +82,8 @@
                 <p id="border"></p><br/>
             </div>
             
-            <div id="background-summary">
-                <ng-md-icon icon="business_center" style="fill:black" size="40"></ng-md-icon> <span id="summary">Education</span>
+            <div id="background-mytitle">
+                <ng-md-icon icon="business_center" style="fill:black" size="40"></ng-md-icon> <span id="mytitle">Education</span>
                 <ul id="exp">
                     <li ng-repeat="y in myDataEdu">
                         <h4><b><a href={{y.link}}>{{y.name}}</a></b></h4>
