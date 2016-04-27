@@ -1,3 +1,14 @@
-{
-    "content": "Administrator"
-}
+[
+    {
+        "name": "Teamwork",
+        "rating": 4
+    },
+    {
+        "name": "Communication",
+        "rating": 4
+    },
+    {
+        "name": "C#, C/C++",
+        "rating": 4
+    }
+]

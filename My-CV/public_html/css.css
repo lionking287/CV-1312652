@@ -103,8 +103,13 @@
     padding-left: 20px; 
 }
 
+#background-summary a:link{
+    text-decoration: none;
+}
+
 #summary{
-    font-size: 20px;
+    color: cadetblue;
+    font-size: 24px;
 }
 
 #border{
@@ -114,3 +119,10 @@
     border: 1px;
     border-style: solid;
 }
+
+#exp p{
+    margin-top: -15px;
+}
+
+
+
