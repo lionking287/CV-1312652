@@ -14,15 +14,54 @@
         <div class="body w3-card-4">
             <div class="myImage"></div>
             <div class="myInfo">
-                <p>
-                    <h1>{{myname}} <br/></h1>
-                    <span class="position">{{mypos}} <br/></span>
-                    <div id="addr"></div> 
-                    <div class="job">
-                        <p>Current: {{mycurr}}<br/>
-                        Education: {{myedu}}<br/></p>
-                    </div>
-                </p>
+                <div>
+                <h1 ng-hide="myname_editorEnabled">{{myname}} 
+                    <img class="img_edit" ng-click="myname_enableEditor()"><br/>
+                </h1>
+                <div ng-show="myname_editorEnabled" >
+                    <br/>
+                    <input class="format" ng-model="editable_myname" ng-show="myname_editorEnabled">
+                    <img class="img_save" ng-click="save_myname()"> or 
+                    <img class="img_cancel" ng-click="disableEditor_myname()">
+                    <br/>
+                    <br/>
+                </div>
+                
+                    
+                    <div class="position">
+                        <a href={{addrlink}} ng-hide="addr_editorEnabled">{{myaddress}}</a>
+                        <img class="img_edit" ng-click="addr_enableEditor()" ng-hide="addr_editorEnabled">
+                        
+                        <div ng-show="addr_editorEnabled">
+                            <input class="format" ng-model="editable_addr" ng-show="addr_editorEnabled">
+                            <img class="img_save" ng-click="save_addr()"> or 
+                            <img class="img_cancel" ng-click="disableEditor_addr()">
+                            
+                        </div>
+                    </div> 
+                
+                
+                <div class="job">
+                    <span ng-hide="cur_editorEnabled">Current: {{mycurr}}</span>
+                    <img class="img_edit" ng-click="cur_enableEditor()" ng-hide="cur_editorEnabled">
+                        
+                        <div ng-show="cur_editorEnabled">
+                            <input class="format" ng-model="editable_cur" ng-show="cur_editorEnabled">
+                            <img class="img_save" ng-click="save_cur()"> or 
+                            <img class="img_cancel" ng-click="disableEditor_cur()">
+                        </div>
+                    <br/>
+                    <span ng-hide="edu_editorEnabled">Education: {{myedu}}</span>
+                    <img class="img_edit" ng-click="edu_enableEditor()" ng-hide="edu_editorEnabled">
+                        
+                        <div ng-show="edu_editorEnabled">
+                            <input class="format" ng-model="editable_edu" ng-show="edu_editorEnabled">
+                            <img class="img_save" ng-click="save_edu()"> or 
+                            <img class="img_cancel" ng-click="disableEditor_edu()">
+                        </div>
+                
+                </div>
+                </div>
             </div>
             <div class="fix-distance">
                 <div class="contact" ng-hide="myCheck">
@@ -40,18 +79,38 @@
             </div>
             <div id="background-mytitle">
                 <ng-md-icon icon="description" style="fill:black" size="40"></ng-md-icon> <span id="mytitle">Summary</span>
-                <p>{{summarycontent}}</p><br/>
+                <img class="img_edit" ng-click="sum_enableEditor()" ng-hide="sum_editorEnabled">
+                <div ng-show="sum_editorEnabled">
+                    <textarea class="format_sum" cols="50" rows="5" ng-model="editable_sum" ng-show="sum_editorEnabled"></textarea>
+                    <img class="img_save" ng-click="save_sum()"> or 
+                    <img class="img_cancel" ng-click="disableEditor_sum()">
+                </div>
+                <p ng-hide="sum_editorEnabled">{{summarycontent}}</p><br/>
                 <p id="border"></p><br/>
             </div>
             
             <div id="background-mytitle">
                 <ng-md-icon icon="my_library_books" style="fill:black" size="40"></ng-md-icon> <span id="mytitle">Experience</span>
                 <ul id="exp">
-                    <li ng-repeat="x in myDataExp">
-                        <h4>{{x.quest}}</b></h4>
+                    <li ng-repeat="x in myDataExp" ng-hide="exp_editorEnabled">
+                        <h4><b>{{x.quest}}</b> <img class="img_edit" ng-click="exp_enableEditor()" ng-hide="exp_editorEnabled"></h4>
+                        
                         <p><a href={{x.link}}>{{x.place}}</a></p>
                         <p>{{x.time}}</p>
+                        
+                        
                     </li>
+                    
+                    <div ng-show="exp_editorEnabled">
+                        <li ng-repeat="x in myDataExp">
+                            <input type="text" ng-model="a" class="format" value={{x.quest}}><br>
+                            <input type="text" class="format" value={{x.place}}><br>
+                            <input type="text" class="format" value={{x.time}}><br><br>
+                        
+                        </li>
+                        <img class="img_save" ng-click="save_exp()"> or 
+                        <img class="img_cancel" ng-click="disableEditor_exp()">
+                    </div>
                 </ul>
                 <p id="border"></p><br/>
             </div>
@@ -100,9 +159,9 @@
                     mod.controller('ctr',['$scope', '$http', function ($scope, $http) {
                     $http.get('profile.json').success(function(data){
                         $scope.myname = data.name;
-                        $scope.mypos = data.pos;
-                        document.getElementById("addr").innerHTML = '<a href="' + data.link + '">' + 
-        data.address + '</a>';
+                        $scope.myaddress = data.pos;
+                        $scope.addrlink = data.link;
+                        
                         
                         $scope.mycurr = data.curr;
                         $scope.myedu = data.edu;
@@ -110,6 +169,94 @@
         data.face + '</a>';
 
                     });
+                    
+                {
+                    $scope.myname_editorEnabled = false;
+                    $scope.myname_enableEditor = function() {
+                        $scope.myname_editorEnabled = true;
+                        $scope.editable_myname = $scope.myname;
+                    };
+
+                    $scope.disableEditor_myname = function() {
+                        $scope.myname_editorEnabled = false;
+                    };
+
+                    $scope.save_myname = function() {
+                        $scope.myname = $scope.editable_myname;
+                        $scope.disableEditor_myname();
+                    };
+                }
+                    
+                {
+                    $scope.addr_editorEnabled = false;
+                    $scope.addr_enableEditor = function() {
+                        $scope.addr_editorEnabled = true;
+                        $scope.editable_addr = $scope.myaddress;
+                    };
+
+                    $scope.disableEditor_addr = function() {
+                        $scope.addr_editorEnabled = false;
+                    };
+
+                    $scope.save_addr = function() {
+                        $scope.myaddress = $scope.editable_addr;
+                        $scope.disableEditor_addr();
+                    };
+                }
+            
+                {
+                    $scope.cur_editorEnabled = false;
+                    $scope.cur_enableEditor = function() {
+                        $scope.cur_editorEnabled = true;
+                        $scope.editable_cur = $scope.mycurr;
+                    };
+
+                    $scope.disableEditor_cur = function() {
+                        $scope.cur_editorEnabled = false;
+                    };
+
+                    $scope.save_cur = function() {
+                        $scope.mycurr = $scope.editable_cur;
+                        $scope.disableEditor_cur();
+                    };
+                }
+                
+                {
+                    $scope.sum_editorEnabled = false;
+                    $scope.sum_enableEditor = function() {
+                        $scope.sum_editorEnabled = true;
+                        $scope.editable_sum = $scope.summarycontent;
+                    };
+
+                    $scope.disableEditor_sum = function() {
+                        $scope.sum_editorEnabled = false;
+                    };
+
+                    $scope.save_sum = function() {
+                        $scope.summarycontent = $scope.editable_sum;
+                        $scope.disableEditor_sum();
+                    };
+                }
+                
+                {
+                    $scope.exp_editorEnabled = false;
+                    $scope.exp_enableEditor = function() {
+                        $scope.exp_editorEnabled = true;
+                        $http.get('experience.json').success(function(data){
+                            $scope.myDataExp = data; 
+                        });
+                    };
+
+                    $scope.disableEditor_exp = function() {
+                        $scope.exp_editorEnabled = false;
+                    };
+
+                    $scope.save_exp = function() {
+                        
+                        $scope.disableEditor_exp();
+                    };
+                }
+                    
                     $http.get('summary.json').success(function(data){
                        $scope.summarycontent = data.content; 
                     });

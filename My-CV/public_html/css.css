@@ -34,6 +34,10 @@
     padding-left:240px;
 }
 
+.myclear{
+    clear: both;
+}
+
 .myInfo a:link{
     text-decoration: none;
     color: blueviolet;
@@ -123,6 +127,55 @@
 #exp p{
     margin-top: -15px;
 }
+
+.img_edit{
+    background-image: url("fix.png");
+    background-size: cover;
+    width: 30px;
+    height: 30px;
+    margin-left: 30px;
+}
+
+.img_edit:hover{
+    cursor: pointer;
+}
+
+.img_save{
+    background-image: url("save.png");
+    background-size: cover;
+    width: 30px;
+    height: 30px;
+    margin-left: 30px;
+}
+
+.img_save:hover{
+    cursor: pointer;
+}
+
+.img_cancel{
+    background-image: url("cancel.png");
+    background-size: cover;
+    width: 30px;
+    height: 30px;
+    margin-left: 30px;
+}
+
+.img_cancel:hover{
+    cursor: pointer;
+}
+
+.format{
+    font-size: 18px;
+    color: black;
+    height: 24px;
+}
+
+.format_sum{
+    font-size: 18px;
+    color: black;
+    
+}
+
 
 
 
