@@ -5,8 +5,9 @@
     <script src="angular.min.js"></script>
     <script src="angular-animate.js"></script>
     <script src="angular-material-icons.min.js"></script>
-    <link rel="stylesheet" href="css.css">
+    <link rel="stylesheet" href="css.css" charset="UTF-8">
     <link rel="stylesheet" href="w3.css">
+    
     </head>
     <body class="container" ng-controller="ctr">
         <div class="imgbackground">
@@ -100,17 +101,18 @@
                         
                         
                     </li>
-                    
                     <div ng-show="exp_editorEnabled">
                         <li ng-repeat="x in myDataExp">
-                            <input type="text" ng-model="a" class="format" value={{x.quest}}><br>
-                            <input type="text" class="format" value={{x.place}}><br>
-                            <input type="text" class="format" value={{x.time}}><br><br>
-                        
+                            <input type="text" class="format" ng-model="x.quest"><br>
+                            <input type="text" class="format" ng-model="x.place"><br>
+                            <input type="text" class="format" ng-model="x.time"><br><br>
+                            
+                            <img class="img_cancel" ng-click="save_exp($index)"> or 
+                            <img class="img_save" ng-click="disableEditor_exp()">
                         </li>
-                        <img class="img_save" ng-click="save_exp()"> or 
-                        <img class="img_cancel" ng-click="disableEditor_exp()">
-                    </div>
+                        
+                        </div>
+                    
                 </ul>
                 <p id="border"></p><br/>
             </div>
@@ -118,11 +120,23 @@
             <div id="background-mytitle">
                 <ng-md-icon icon="assignment" style="fill:black" size="40"></ng-md-icon> <span id="mytitle">Project</span>
                 <ul id="exp">
-                    <li ng-repeat="x in myDataPro">
-                        <h4><b>{{x.name}}</b></h4>
+                    <li ng-repeat="x in myDataPro" ng-hide="pro_editorEnabled">
+                        <h4><b>{{x.name}}</b> <img class="img_edit" ng-click="pro_enableEditor()" ng-hide="pro_editorEnabled"></h4>
                         <p>{{x.language}}</p>
                         <h5>{{x.descript}}</h5>
                     </li>
+                    
+                    <div ng-show="pro_editorEnabled">
+                        <li ng-repeat="x in myDataPro">
+                            <input type="text" class="format" ng-model="x.name"><br>
+                            <input type="text" class="format" ng-model="x.language"><br>
+                            <input type="text" class="format" ng-model="x.descript"><br><br>
+                            
+                            <img class="img_cancel" ng-click="save_pro($index)"> or 
+                            <img class="img_save" ng-click="disableEditor_pro()">
+                        </li>
+                        
+                    </div>
                 </ul>
                 <p id="border"></p><br/>
             </div>
@@ -130,30 +144,51 @@
             <div id="background-mytitle">
                 <ng-md-icon icon="description" style="fill:black" size="40"></ng-md-icon> <span id="mytitle">Skills</span>
                 <div ng-repeat="x in myDataSkills">
-                    <h5><li>{{x.name}}:</li> 
-                        <ng-md-icon icon="star" style="fill:#d2be0e" size="20"></ng-md-icon>
-                        <ng-md-icon icon="star" style="fill:#d2be0e" size="20"></ng-md-icon>
-                        <ng-md-icon icon="star" style="fill:#d2be0e" size="20"></ng-md-icon>
-                        <ng-md-icon icon="star" style="fill:#d2be0e" size="20"></ng-md-icon>
-                        <ng-md-icon icon="star_border" style="fill:#d2be0e" size="20"></ng-md-icon>
-                    </h5>
+                    <ul><li>
+                            <fieldset class="rating"><b>{{x.name}}:</b>
+                            <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="Rocks!">5 stars</label>
+                            <input type="radio" id="star4" name="rating" value="4" checked/><label for="star4" title="Pretty good">4 stars</label>
+                            <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="Meh">3 stars</label>
+                            <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="Kinda bad">2 stars</label>
+                            <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="Sucks big time">1 star</label>
+                        </fieldset>
+                        </li>
+                        
+                    </ul>
+                    
                 </div>
+                
                 <p id="border"></p><br/>
             </div>
             
             <div id="background-mytitle">
                 <ng-md-icon icon="business_center" style="fill:black" size="40"></ng-md-icon> <span id="mytitle">Education</span>
                 <ul id="exp">
-                    <li ng-repeat="y in myDataEdu">
-                        <h4><b><a href={{y.link}}>{{y.name}}</a></b></h4>
+                    <li ng-repeat="y in myDataEdu" ng-hide="edu_editorEnabled">
+                        <h4><b><a href={{y.link}}>{{y.name}}</a></b> <img class="img_edit" ng-click="edu_enableEditor()" ng-hide="edu_editorEnabled"></h4>
                         <p>{{y.position}}</p>
                         <p>{{y.time}}</p>
                     </li>
+                    
+                    <div ng-show="edu_editorEnabled">
+                        <li ng-repeat="y in myDataEdu">
+                            <input type="text" class="format" ng-model="y.name"><br>
+                            <input type="text" class="format" ng-model="y.position"><br>
+                            <input type="text" class="format" ng-model="y.time"><br><br>
+                            
+                            <img class="img_cancel" ng-click="save_edu($index)"> or 
+                            <img class="img_save" ng-click="disableEditor_edu()">
+                        </li>
+                        
+                    </div>                    
                 </ul>
                 <br/>
             </div>
         </div>
         
+        
+  
+
         <script>
             var mod = angular.module('cv',['ngAnimate','ngMdIcons'])
                     mod.controller('ctr',['$scope', '$http', function ($scope, $http) {
@@ -251,11 +286,51 @@
                         $scope.exp_editorEnabled = false;
                     };
 
-                    $scope.save_exp = function() {
-                        
+                    $scope.save_exp = function(index) {
+                        $scope.myDataExp[index].quest = $scope.x.quest;
                         $scope.disableEditor_exp();
                     };
                 }
+                
+                {
+                    $scope.pro_editorEnabled = false;
+                    $scope.pro_enableEditor = function() {
+                        $scope.pro_editorEnabled = true;
+                        $http.get('project.json').success(function(data){
+                            $scope.myDataPro = data; 
+                        });
+                    };
+
+                    $scope.disableEditor_pro = function() {
+                        $scope.pro_editorEnabled = false;
+                    };
+
+                    $scope.save_pro = function(index) {
+                        $scope.myDataPro[index].name = $scope.x.name;
+                        $scope.disableEditor_pro();
+                    };
+                }
+                    
+                {
+                    $scope.edu_editorEnabled = false;
+                    $scope.edu_enableEditor = function() {
+                        $scope.edu_editorEnabled = true;
+                        $http.get('education.json').success(function(data){
+                            $scope.myDataEdu = data; 
+                        });
+                    };
+
+                    $scope.disableEditor_edu = function() {
+                        $scope.edu_editorEnabled = false;
+                    };
+
+                    $scope.save_edu = function(index) {
+                        $scope.myDataEdu[index].name = $scope.y.name;
+                        $scope.disableEditor_edu();
+                    };
+                }   
+                    
+                    
                     
                     $http.get('summary.json').success(function(data){
                        $scope.summarycontent = data.content; 
